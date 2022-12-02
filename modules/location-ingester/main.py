@@ -19,7 +19,7 @@ class LocationIngesterServicer(location_pb2_grpc.LocationServiceServicer):
         publish_location(payload)
         return location_pb2.LocationMessage(**payload)
 
-# Intiialize gRPC server
+# Initialize gRPC server
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
 location_pb2_grpc.add_LocationServiceServicer_to_server(LocationIngesterServicer(), server)
 
@@ -29,8 +29,3 @@ server.start()
 
 # Keep thread alive
 server.wait_for_termination()
-# try:
-#     while True:
-#         time.sleep(86400)
-# except KeyboardInterrupt:
-#     server.stop(0)
